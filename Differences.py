@@ -1,127 +1,43 @@
-# Diccionario de traducción
-codon_dict = {
-    "MGY": "Met",
-    "INV": "Ile",
-    "FAF": "Phe",
-    "PFT": "Phe",
-    "IYS": "Tyr",
-    "LLL": "Leu",
-    "CRM": "Cys",
-    "NSR": "Asn",
-    "NYI": "Arg",
-    "IAQ": "Ile",
-    "VDV": "Val",
-    "VNF": "Val",
-    "NLT": "Leu",
-    "GGS": "Gly",
-    "GCS": "Ala",
-    "GCA": "Ala",
-    "GCC": "Ala",
-    "GGT": "Pro",
-    "GGC": "Pro",
-    "GGA": "Pro",
-    "GGG": "Pro",
-    "GAT": "Asp",
-    "GAC": "Asp",
-    "GAA": "Glu",
-    "GAG": "Glu",
-    "GTN": "Gln",
-    "GTC": "Gln",
-    "GTA": "Val",
-    "GTG": "Val",
-    "GYS": "Cys",
-    "GYT": "Trp",
-    "GYT": "Cys",
-    "GYT": "Trp",
-    "GGG": "Arg",
-    "GGA": "Gly",
-    "GGC": "Ala",
-    "GGG": "Gly",
-    "GGA": "Ala",
-    "GGC": "Ala",
-    "GTT": "Val",
-    "GTC": "Val",
-    "GTA": "Val",
-    "GTG": "Val",
-    "TTA": "Leu",
-    "TTG": "Leu",
-    "CTT": "Leu",
-    "CTC": "Leu",
-    "CTA": "Leu",
-    "CTG": "Leu",
-    "TAT": "Tyr",
-    "TAC": "Tyr",
-    "TAA": "Stop",
-    "TAG": "Stop",
-    "ATG": "Met",
-    "ATC": "Ile",
-    "ATA": "Ile",
-    "ATT": "Ile",
-    "ACA": "Thr",
-    "ACC": "Thr",
-    "ACT": "Thr",
-    "ACG": "Thr",
-    "AAT": "Asn",
-    "AAC": "Asn",
-    "AAA": "Lys",
-    "AAG": "Lys",
-    "AGT": "Ser",
-    "AGC": "Ser",
-    "AGA": "Arg",
-    "AGG": "Arg",
-    "CCT": "Pro",
-    "CCC": "Pro",
-    "CCA": "Pro",
-    "CCG": "Pro",
-    "CAT": "His",
-    "CAC": "His",
-    "CAA": "Gln",
-    "CAG": "Gln",
-    "CGT": "Arg",
-    "CGC": "Arg",
-    "CGA": "Arg",
-    "CGG": "Arg"
+aminoacido_dict = {
+    "A": ["GCT", "GCC", "GCA", "GCG"],
+    "R": ["CGT", "CGC", "CGA", "CGG", "AGA", "AGG"],
+    "N": ["AAT", "AAC"],
+    "D": ["GAT", "GAC"],
+    "B": ["AAT", "AAC", "GAT", "GAC"],
+    "C": ["TGT", "TGC"],
+    "Q": ["CAA", "CAG"],
+    "E": ["GAA", "GAG"],
+    "Z": ["CAA", "CAG", "GAA", "GAG"],
+    "G": ["GGT", "GGC", "GGA", "GGG"],
+    "H": ["CAT", "CAC"],
+    "I": ["AAT", "ATC", "ATA"],
+    "L": ["CTT", "CTC", "CTA", "CTG", "TTA", "TTG"],
+    "K": ["AAA", "AAG"],
+    "M": ["ATG"],
+    "F": ["TTT", "TTC"],
+    "P": ["CCT", "CCC", "CCA", "CCG"],
+    "S": ["TCT", "TCC", "TCA", "TCG", "AGT", "AGC"],
+    "T": ["ACT", "ACC", "ACA", "ACG"],
+    "W": ["TGG"],
+    "Y": ["TAT", "TAC"],
+    "V": ["GTT", "GTC", "GTA", "GTC"]
 }
 
-aminoacido_dict = {
-    "Ala": ["GCT", "GCC", "GCA", "GCG"],
-    "Arg": ["CGT", "CGC", "CGA", "CGG", "AGA", "AGG"],
-    "Asn": ["AAT", "AAC"],
-    "Asp": ["GAT", "GAC"],
-    "Cys": ["TGT", "TGC"],
-    "Gln": ["CAA", "CAG"],
-    "Glu": ["GAA", "GAG"],
-    "Gly": ["GGT", "GGC", "GGA", "GGG"],
-    "His": ["CAT", "CAC"],
-    "Ile": ["ATT", "ATC", "ATA"],
-    "Leu": ["CTT", "CTC", "CTA", "CTG", "TTA", "TTG"],
-    "Lys": ["AAA", "AAG"],
-    "Met": ["ATG"],
-    "Phe": ["TTT", "TTC"],
-    "Pro": ["CCT", "CCC", "CCA", "CCG"],
-    "Ser": ["TCT", "TCC", "TCA", "TCG", "AGT", "AGC"],
-    "Thr": ["ACT", "ACC", "ACA", "ACG"],
-    "Trp": ["TGG"],
-    "Tyr": ["TAT", "TAC"],
-    "Val": ["GTT", "GTC", "GTA", "GTG"],
-}
 
 # La cadena de aminoácidos que deseas traducir
 cadena_aminoacidos = "MGYINVFAFPFTIYSLLLCRMNSRNYIAQVDVVNFNLT"
 
-# Función para traducir la cadena de aminoácidos a ARNm
-def traducir_a_ARNm(cadena_aminoacidos):
-    secuencia_arnm = ""
-    for i in range(0, len(cadena_aminoacidos), 3):
-        grupo = cadena_aminoacidos[i:i+3]
-        aminoacido = codon_dict.get(grupo, 'XXX')  # Obtener el aminoácido
-        if aminoacido != 'XXX':
-            codones = aminoacido_dict.get(aminoacido, [])
-            secuencia_arnm += "/".join(codones) + " "  # Agregar los codones del aminoácido
-        else:
-            secuencia_arnm += "XXX "  # Si no se encuentra el aminoácido, se agrega XXX
-    return secuencia_arnm.strip()
+def traducit_a_codones(cadena_aminoacidos):
+    cadena_codones = "ATG"
+    for index in range(0, 6):
+        for aminoacido in cadena_aminoacidos:
+            # Si el aminoacido esta en el diccionario de aminoacidos
+            if aminoacido in aminoacido_dict:
+                # Acceder al primer codon del aminoacido
+                cadena_codones += aminoacido_dict[aminoacido][0]
+            
+    # Regresar la cadena de codones como una cadena de texto
+    return cadena_codones
 
-# Llama a la función y muestra la secuencia de ARNm resultante
-secuencia_arnm = traducir_a_ARNm(cadena_aminoacidos)
-print(secuencia_arnm)
+if __name__ == "__main__":
+    print(traducit_a_codones(cadena_aminoacidos))
