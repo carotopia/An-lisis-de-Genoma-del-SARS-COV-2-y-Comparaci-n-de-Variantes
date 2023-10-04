@@ -1,4 +1,45 @@
+aminoacido_dict = {
+    "A": ["GCT", "GCC", "GCA", "GCG"],
+    "R": ["CGT", "CGC", "CGA", "CGG", "AGA", "AGG"],
+    "N": ["AAT", "AAC"],
+    "D": ["GAT", "GAC"],
+    "B": ["AAT", "AAC", "GAT", "GAC"],
+    "C": ["TGT", "TGC"],
+    "Q": ["CAA", "CAG"],
+    "E": ["GAA", "GAG"],
+    "Z": ["CAA", "CAG", "GAA", "GAG"],
+    "G": ["GGT", "GGC", "GGA", "GGG"],
+    "H": ["CAT", "CAC"],
+    "I": ["AAT", "ATC", "ATA"],
+    "L": ["CTT", "CTC", "CTA", "CTG", "TTA", "TTG"],
+    "K": ["AAA", "AAG"],
+    "M": ["ATG"],
+    "F": ["TTT", "TTC"],
+    "P": ["CCT", "CCC", "CCA", "CCG"],
+    "S": ["TCT", "TCC", "TCA", "TCG", "AGT", "AGC"],
+    "T": ["ACT", "ACC", "ACA", "ACG"],
+    "W": ["TGG"],
+    "Y": ["TAT", "TAC"],
+    "V": ["GTT", "GTC", "GTA", "GTC"]
+}
 
+
+# La cadena de aminoácidos que deseas traducir
+cadena_aminoacidos = "MGYINVFAFPFTIYSLLLCRMNSRNYIAQVDVVNFNLT"
+
+def traducit_a_codones(cadena_aminoacidos):
+    cadena_codones = "ATG"
+    for index in range(0, 6):
+        for aminoacido in cadena_aminoacidos:
+            # Si el aminoacido esta en el diccionario de aminoacidos
+            if aminoacido in aminoacido_dict:
+                # Acceder al primer codon del aminoacido
+                cadena_codones += aminoacido_dict[aminoacido][0]
+            
+    # Regresar la cadena de codones como una cadena de texto
+    return cadena_codones
+
+ 
 # 4.Compara las versiones del genoma del virus de Wuhan, 2019 vs Texas, 2020. Determina donde  difieren, y si tales diferencias resultan en aminoácidos diferentes.
 # Lista los índices donde encuentres diferencias, muestra los codones afectados por tal diferencia y el aminoácido producido por cada versión.
 
@@ -85,3 +126,4 @@ for i, wuhan, texas in differences: # Iterar sobre cada diferencia
     print(f"Aminoacido (Wuhan): {amino_acid_wuhan}") # Imprimir el aminoácido producido por el codón afectado en Wuhan
     print(f"Aminoacido (Texas): {amino_acid_texas}") # Imprimir el aminoácido producido por el codón afectado en Texas
     print("---")
+
